@@ -1,5 +1,7 @@
+import clsx from 'clsx';
 import Image from 'next/image';
 import * as React from 'react';
+import { FiShare } from 'react-icons/fi';
 
 import Layout from '@/components/layout/Layout';
 import ButtonLink from '@/components/links/ButtonLink';
@@ -25,7 +27,7 @@ const data = {
   image: 'https://avatars.githubusercontent.com/u/51127598?v=4',
   name: 'Brayan Beltre',
   description:
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit ullam amet consectetur nobis distinctio deserunt officia illo officiis repellat corrupti quis dolorem eligendi nostrum, iste tenetur, maxime, sit repellendus magnam.',
+    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit ullam amet consectetur nobis.',
   links: [
     {
       id: 1,
@@ -67,7 +69,8 @@ const data = {
       id: 2,
       name: 'Twitter',
       link: 'https://twitter.com',
-      image: 'https://avatars.githubusercontent.com/u/51127598?v=4',
+      image:
+        'https://d1fdloi71mui9q.cloudfront.net/PQ80HaMlSnCFZhcMWfyb_images.png',
     },
   ],
 };
@@ -91,9 +94,10 @@ export default function HomePage() {
           <div className='layout relative flex min-h-screen max-w-sm flex-col items-center justify-center py-12 text-center'>
             <Image
               src={data.image}
-              height={200}
-              width={200}
+              height={100}
+              width={100}
               alt='Profile image'
+              className='rounded-full'
             />
 
             <h1 className='mt-4'>{data.name}</h1>
@@ -103,11 +107,29 @@ export default function HomePage() {
             {data.links.map((link) => (
               <ButtonLink
                 key={link.id}
-                className='mt-6 w-full'
+                className={clsx(
+                  'group mt-6 flex w-full items-center justify-between py-0 pl-0'
+                )}
                 href={link.link}
                 variant='light'
               >
-                {link.name}
+                {link.image ? (
+                  <Image
+                    src={data.image}
+                    height={32}
+                    width={32}
+                    alt='Profile image'
+                    className='rounded-sm'
+                  />
+                ) : (
+                  <div />
+                )}
+
+                <div>{link.name}</div>
+
+                <div className='opacity-0 group-hover:opacity-100'>
+                  <FiShare className='h-4 w-4' />
+                </div>
               </ButtonLink>
             ))}
 
